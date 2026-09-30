@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3:17</title>
+<style>
+:root{color-scheme:dark;--bg:#0a0c0b;--pan:#131715;--ink:#cfd8d0;--dim:#7d8a80;--red:#c0392b;--glow:#e8d9a0;--line:#26302a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+body{min-height:100%;background:radial-gradient(ellipse at 50% 0,#17201b 0,var(--bg) 70%)}
+#app{max-width:680px;margin:0 auto;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px}
+#clock{font-family:"Courier New",monospace;font-size:38px;color:var(--glow);letter-spacing:2px;text-shadow:0 0 12px #e8d9a066;animation:fl 5s infinite}
+@keyframes fl{0%,88%,92%,100%{opacity:1}90%{opacity:.2}94%{opacity:.6}}
+.fear{flex:1;max-width:220px;font-size:13px;color:var(--dim)}
+.bar{height:6px;background:var(--line);margin-top:4px}
+#fb{height:100%;width:0;background:var(--red);transition:width .5s}
+h1{font-size:15px;font-weight:normal;color:var(--dim);margin:14px 0 6px;font-style:italic}
+#txt{background:var(--pan);border:1px solid var(--line);padding:16px;min-height:150px;font-size:17px}
+#txt p{margin:0 0 10px}
+.w{color:var(--red);font-style:italic}
+.hs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+button{font:inherit;font-size:15px;background:var(--pan);color:var(--ink);border:1px solid var(--line);padding:11px 12px;text-align:left;cursor:pointer}
+button:hover,button:focus-visible{border-color:var(--glow);outline:none;color:var(--glow)}
+button.go{border-left:3px solid var(--red)}
+.inv{margin-top:14px;font-size:14px;color:var(--dim)}
+.inv button{display:inline-block;padding:6px 10px;margin:4px 4px 0 0;font-size:13px}
+.code{display:flex;gap:8px;margin-top:8px}
+input{font:20px "Courier New",monospace;letter-spacing:6px;width:130px;background:#000;color:var(--glow);border:1px solid var(--glow);padding:8px;text-align:center}
+.shake{animation:sh .4s}
+@keyframes sh{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+#dark{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at var(--x,50%) var(--y,35%),transparent 12%,#000 90%);opacity:.5}
+.end{text-align:center;padding:20px 0}.end h2{color:var(--red);font-weight:normal;font-size:28px}
+@media(max-width:480px){.hs{grid-template-columns:1fr}#clock{font-size:30px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+#js{position:fixed;inset:0;z-index:9;display:none;align-items:center;justify-content:center;background:radial-gradient(circle,#5a0000,#000 70%);color:#fff;font:bold 9vw Georgia,serif;text-align:center;letter-spacing:.1em;pointer-events:none;text-shadow:0 0 30px red}
+#js.on{display:flex;animation:sh .15s 3}
+.cb{height:8px;background:var(--line);margin:8px 0}.cb i{display:block;height:100%;width:100%;background:var(--red)}
+.gl{animation:glt .3s infinite;color:var(--red)!important}
+@keyframes glt{25%{transform:translate(-3px,1px)}50%{transform:translate(3px,-1px)}75%{transform:translate(-2px,0)}}
+#gh{position:fixed;bottom:-10px;right:6%;width:54px;height:180px;background:#000;border-radius:50% 50% 6px 6px/22% 22% 6px 6px;opacity:0;pointer-events:none;transition:all .8s;z-index:5;transform-origin:bottom}
+#gh:before,#gh:after{content:"";position:absolute;top:26px;width:7px;height:9px;background:#fff;border-radius:50%;box-shadow:0 0 10px #fff}
+#gh:before{left:14px}#gh:after{right:14px}
+</style>
+</head>
+<body>
+<div id="dark"></div><div id="js"></div><div id="gh"></div>
+<div id="app">
+<div class="top"><div id="clock">03:17</div><div class="fear">Ketakutan<div class="bar"><div id="fb"></div></div></div></div>
+<h1 id="loc"></h1>
+<div id="txt"></div>
+<div class="hs" id="hs"></div>
+<div class="inv" id="inv"></div>
+</div>
+<script>
+var S,$=function(i){return document.getElementById(i)};
+var W=["Kamu yakin sendirian?","Ada napas dingin di tengkukmu.","Di suatu tempat, sebuah bangku bergeser.","Ada yang menyebut namamu dari ujung koridor.","Bau kapur tulis... dan sesuatu yang basah.","Jam di dinding berdetak mundur satu kali.","Langkah kaki kecil berhenti tepat di belakangmu."];
+var ITEMS={senter:["Senter","Senter tua yang redup. Baterainya kosong, cari penggantinya (toilet?)."],baterai:["Baterai","Dua baterai AA. Masih hangat, padahal tidak ada yang memakainya."],k1:["Sobekan Diary 1","\"Kalau aku menghilang, cari di brankas Pak Wira. Angkanya: nomor absenku, lalu kelasku. -Laras\""],k2:["Sobekan Diary 2","\"Aku tidak pergi. Aku dikunci di ruang arsip, di balik jam perpustakaan. Jam itu benar hanya saat semuanya berakhir. -Laras\""],kg:["Kunci Ruang Guru","Kunci kuningan bertuliskan 'R. GURU'."],kp:["Kunci Perpustakaan","Kunci berkarat dengan gantungan buku kecil."],lio:["Liontin Laras","Liontin perak berukir huruf L. Masih dingin seperti baru diambil dari air."],bk:["Map Bukti","Surat pemindahan palsu, ditandatangani Pak Wira. Tanggalnya: 17 Maret, jam 03.17."]};
+function start(){S={r:"koridor",f:{},inv:[],fear:0,end:0,nap:3,chase:0,t50:0,t80:0,gh:0};gh();$("fb").style.width="0%";$("clock").className="";$("dark").style.opacity=.5;show(["Pukul 03:17 dini hari. Kamu tertidur di kelas saat kerja kelompok, dan sekarang seluruh sekolah terkunci dari luar.","Jam dinding di koridor berhenti. Senter ponselmu mati. Dari suatu tempat terdengar bel berbunyi... padahal listrik sudah padam.","<span class='w'>Dari lantai atas, suara anak perempuan berbisik: '"+N+"... akhirnya kamu datang.'</span>"]);say(N+"... akhirnya kamu datang.");draw()}
+function show(a){S.chase=0;$("txt").innerHTML=a.map(function(x){return "<p>"+x+"</p>"}).join("")}
+function add(t){$("txt").insertAdjacentHTML("beforeend","<p>"+t+"</p>")}
+function fear(n){S.fear=Math.min(100,S.fear+n);$("fb").style.width=S.fear+"%";$("dark").style.opacity=.5+S.fear/220;$("clock").className=S.fear>55?"gl":"";if(S.fear>=50&&!S.t50){S.t50=1;jump()}if(S.fear>=80&&!S.t80){S.t80=1;jump()}if(S.fear>=100&&!S.end){ending("Kamu Terlalu Lama Di Sini","Langkah-langkah itu akhirnya berhenti di belakangmu. Pagi harinya, penjaga sekolah menemukan bangku ke-17 terisi lagi. Jam dinding kembali berdetak: 03:17, 03:17, 03:17.")}}
+var AC;
+function snd(){try{AC=new(window.AudioContext||window.webkitAudioContext)();[48,51].forEach(function(f){var o=AC.createOscillator(),g=AC.createGain();o.type="sawtooth";o.frequency.value=f;g.gain.value=.03;o.connect(g);g.connect(AC.destination);o.start()});beat()}catch(e){}}
+function beat(){if(AC&&!S.end&&S.fear>25){tone(60,.15,.3);setTimeout(function(){tone(55,.12,.2)},180)}setTimeout(beat,1400-S.fear*10)}
+function tone(f,d,v,t){if(!AC)return;try{var o=AC.createOscillator(),g=AC.createGain();o.type=t||"sine";o.frequency.value=f;g.gain.setValueAtTime(v,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+document.addEventListener("click",snd,{once:true});
+document.addEventListener("pointermove",function(e){var d=$("dark");d.style.setProperty("--x",e.clientX+"px");d.style.setProperty("--y",e.clientY+"px")});
+var JT=["DIA DI BELAKANGMU","JANGAN BERBALIK","03:17","KAMU MENDENGARNYA?","LARAS?"];
+function jump(){var j=$("js");j.textContent=JT[Math.floor(Math.random()*JT.length)];j.className="on";tone(90,.6,.5,"sawtooth");tone(1400,.35,.25,"square");if(navigator.vibrate)navigator.vibrate(200);setTimeout(function(){j.className=""},450)}
+function chase(){if(S.end||S.chase)return;S.chase=1;var t=3;add('<span class="w">Langkah cepat mendekat! SEMBUNYI SEKARANG!</span><div class="cb"><i id="cbf"></i></div><button id="hd">Sembunyi di kegelapan!</button>');tone(70,.3,.4);var iv=setInterval(function(){t-=.1;var f=$("cbf");if(f)f.style.width=(t/3*100)+"%";if(t<=0){clearInterval(iv);if(S.chase){S.chase=0;jump();fear(22);add('<span class="w">Sesuatu menyentuh bahumu. Dingin. Lalu ia menghilang.</span>');var b=$("hd");if(b)b.remove()}}},100);$("hd").onclick=function(){if(!S.chase)return;S.chase=0;clearInterval(iv);this.remove();add("Kamu menahan napas. Bayangan itu lewat begitu dekat sampai tercium bau tanah basah. Lalu pergi.");fear(3)}}
+function lit(){return has("senter")&&has("baterai")}
+var N="";
+function say(t){try{if(!window.speechSynthesis)return;var u=new SpeechSynthesisUtterance(t.replace(/\.\.\./g,", "));u.lang="id-ID";var v=speechSynthesis.getVoices().filter(function(x){return x.lang&&x.lang.toLowerCase().indexOf("id")==0});if(v[0])u.voice=v[0];u.pitch=.1;u.rate=.55;u.volume=.55;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function init(){S={end:0,fear:0,chase:0,gh:0};$("hs").innerHTML="";$("inv").innerHTML="";$("loc").textContent="";$("fb").style.width="0%";$("gh").style.opacity=0;if(N)return start();show(["Sebelum masuk... siapa namamu?"]);add('<div class="code"><input id="nm" maxlength="12" style="width:200px;letter-spacing:1px;font-size:18px;font-family:Georgia"><button id="nb2">Mulai</button></div>');$("nm").focus();var f=function(){N=$("nm").value.trim()||"Kamu";start()};$("nb2").onclick=f;$("nm").onkeydown=function(e){if(e.key==="Enter")f()}}
+function gh(){var g=$("gh"),l=S.gh;g.style.opacity=l?Math.min(.95,.15+l*.25):0;g.style.transform="scale("+(.5+l*.45)+")";g.style.right=(Math.random()*80+5)+"%"}
+function noise(d,v,fq,ty){if(!AC)return;try{var n=Math.floor(AC.sampleRate*d),b=AC.createBuffer(1,n,AC.sampleRate),a=b.getChannelData(0);for(var i=0;i<n;i++)a[i]=Math.random()*2-1;var s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type=ty;f.frequency.value=fq;g.gain.setValueAtTime(v,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);s.connect(f);f.connect(g);g.connect(AC.destination);s.start()}catch(e){}}
+function blackout(){var d=$("dark");d.style.opacity=1;noise(.3,.3,150,"lowpass");setTimeout(function(){d.style.opacity=.5+S.fear/220},300)}
+function cz(t){if(S.fear<60)return t;return t.split("").map(function(c){return Math.random()<.06&&c!==" "?"▒":c}).join("")}
+function scare(){if(Math.random()<.5){var wt=(Math.random()<.3?(N||"Kamu")+"... jangan pergi...":W[Math.floor(Math.random()*W.length)]);add('<span class="w">'+wt+"</span>");say(wt);$("app").classList.add("shake");setTimeout(function(){$("app").classList.remove("shake")},400)}if(Math.random()<.35)noise(.9,.08,3200,"bandpass");if(Math.random()<.2)noise(.4,.35,180,"lowpass");if(Math.random()<.1)blackout();if(Math.random()<.12)jump();else if(S.fear>30&&Math.random()<.35)chase()}
+function go(r,t){S.r=r;fear(4);show(t);if(S.fear>35){S.gh++;if(S.gh>=4){S.gh=0;gh();jump();fear(20);add('<span class="w">Sosok itu tepat di sampingmu. Wajahnya menoleh pelan ke arahmu.</span>')}else{gh();add('<span class="w">'+["","Di kejauhan ada sosok berdiri diam.","Sosok itu lebih dekat. Kepalanya miring.","Sosok itu di ujung ruangan. Kamu mendengar napasnya."][S.gh]+"</span>")}}scare();draw()}
+function has(i){return S.inv.indexOf(i)>-1}
+function give(i){if(!has(i))S.inv.push(i)}
+function ask(prompt,ans,ok){add(prompt+'<div class="code"><input id="ci" maxlength="4" inputmode="numeric" autocomplete="off"><button id="cb">Masukkan</button></div>');$("ci").focus();var f=function(){var v=$("ci").value.replace(/\D/g,"");if(ans.indexOf(v)>-1){ok()}else{fear(6);add('<span class="w">Klik. Salah. Sesuatu di dinding terkekeh pelan.</span>')}};$("cb").onclick=f;$("ci").onkeydown=function(e){if(e.key==="Enter")f()}}
+var RM={
+koridor:{n:"Koridor Lantai 2",t:"Lantai linoleum berkilat basah. Deretan loker berkarat memanjang di kegelapan.",h:function(){var a=[["Jam dinding","jam"],["Loker No. 17","loker"],["Masuk Kelas 9-B","kelas","go"],["Ruang Guru"+(S.f.guru?"":" (terkunci)"),"guru","go"],["Toilet Perempuan","toilet","go"],["Perpustakaan"+(has("kp")?"":" (terkunci)"),"perpus","go"],["Pintu Gerbang","gerbang","go"]];return a}},
+kelas:{n:"Kelas 9-B",t:"Bangku-bangku tersusun rapi, kecuali satu yang menghadap ke belakang. Papan tulis penuh sisa tulisan kapur.",h:function(){return[["Papan tulis","papan"],["Bangku nomor 17","meja"],["Kembali ke koridor","koridor","go"]]}},
+guru:{n:"Ruang Guru",t:"Bau kopi basi. Foto wisuda menempel di dinding, satu wajah dicoret dengan spidol merah.",h:function(){return[["Foto wisuda","foto"],["Brankas di sudut","brankas"],["Kembali ke koridor","koridor","go"]]}},
+perpus:{n:"Perpustakaan",t:"Rak-rak menjulang seperti barisan orang berdiri. Tanpa cahaya, kamu tak melihat apa pun.",h:function(){return[["Rak buku","rak"],["Jam antik besar","jamantik"],["Kembali ke koridor","koridor","go"]]}},
+toilet:{n:"Toilet Perempuan",t:"Ubin putih retak. Satu keran menetes pelan. Cermin panjang di dinding tertutup embun, padahal udara begitu dingin.",h:function(){return[["Cermin","cermin"],["Bilik ke-3","bilik"],["Kembali ke koridor","koridor","go"]]}},
+arsip:{n:"Ruang Arsip Rahasia",t:"Ruangan sempit dengan bau tanah. Di lantai ada bekas cakaran, dan di sudut... sebuah liontin serta map tua.",h:function(){return[["Ambil liontin","lio"],["Ambil map","map"],["Kembali ke perpustakaan","perpus","go"]]}}};
+function draw(){if(S.end)return;var r=RM[S.r];$("loc").textContent=r.n;$("hs").innerHTML="";r.h().forEach(function(h){var b=document.createElement("button");b.textContent=cz(h[0]);if(h[2])b.className="go";b.onclick=function(){act(h[1])};$("hs").appendChild(b)});if(S.fear>70&&Math.random()<.6){var fb=document.createElement("button");fb.textContent="Menoleh ke belakang";fb.onclick=function(){jump();fear(10);add('<span class="w">Tidak ada apa-apa. Itu yang paling menakutkan.</span>');draw()};$("hs").appendChild(fb)}$("inv").innerHTML=S.inv.length?"Barang: ":"";S.inv.forEach(function(i){var b=document.createElement("button");b.textContent=ITEMS[i][0];b.onclick=function(){add("<i>"+ITEMS[i][0]+":</i> "+ITEMS[i][1])};$("inv").appendChild(b)});var nb=document.createElement("button");nb.textContent="Tarik napas ("+S.nap+"x)";nb.onclick=function(){if(S.nap>0){S.nap--;S.fear=Math.max(0,S.fear-10);S.gh=Math.max(0,S.gh-1);gh();fear(0);add("Kamu menarik napas dalam. Detak jantungmu melambat, sedikit.");draw()}};$("inv").appendChild(nb);if(!$("txt").innerHTML)show([r.t])}
+function act(a){fear(1);var M={
+koridor:function(){go("koridor",[RM.koridor.t,"Kamu kembali ke koridor."])},
+kelas:function(){go("kelas",[RM.kelas.t])},
+guru:function(){if(!S.f.guru)return add("Terkunci. Ada plakat kecil: 'R. GURU'.");go("guru",[RM.guru.t])},
+perpus:function(){if(!has("kp"))return add("Pintu terkunci rapat. Dari celah bawahnya merembes udara dingin.");go("perpus",[RM.perpus.t+(lit()?" Senter kuningmu berkedip dan menyapu rak-rak.":" Senter di tanganmu mati. Kamu butuh baterai.")])},
+arsip:function(){go("arsip",[RM.arsip.t])},
+toilet:function(){go("toilet",[RM.toilet.t])},
+cermin:function(){add("Embun di cermin membentuk tulisan pelan-pelan: <span class=\"w\">'DIA MASIH MENUNGGU DI BALIK JAM.'</span> Bayanganmu tersenyum, sepersekian detik terlambat.");fear(6);jump()},
+bilik:function(){if(has("baterai"))return add("Bilik kosong. Hanya ada rambut panjang basah di lantai.");give("baterai");add("Di atas tangki bilik ke-3 ada <b>baterai</b>. Pintu di belakangmu menutup sendiri.");fear(4);draw()},
+jam:function(){add("Jam dinding berhenti tepat di <b>03:17</b>. Di bawahnya ada goresan kuku: <i>'Jangan lihat jarumnya, dengarkan ia berhenti.'</i>")},
+loker:function(){if(S.f.loker)return add("Loker kosong. Hanya ada bekas jari berdarah di pintu dalam.");ask("Loker No. 17 dikunci gembok angka 4 digit. Di pintunya tertempel stiker: <i>'Tanggal-Bulan'.</i>","1703",function(){S.f.loker=1;S.f.guru=1;give("senter");give("kg");add("Gembok terbuka. Di dalamnya ada <b>senter</b> dan <b>Kunci Ruang Guru</b>.");draw()})},
+papan:function(){add("Tulisan kapur pudar: <b>'Ulangan Sejarah - 17 Maret'</b>. Di bawahnya, daftar absen. Nomor 17 dicoret berulang-ulang, namanya nyaris terhapus: <i>Laras, Kelas 9-B</i>.")},
+meja:function(){if(has("k1"))return add("Laci sudah kosong. Ada ukiran: 'TOLONG'.");give("k1");add("Di laci kamu menemukan <b>Sobekan Diary 1</b>. Tulisannya masih basah, seakan ditulis semenit yang lalu.");draw()},
+foto:function(){add("Foto angkatan 2009. Wajah yang dicoret merah adalah seorang gadis berkepang, dengan nama <i>Laras</i> di bawahnya. Pak Wira berdiri di belakangnya, tersenyum terlalu lebar.")},
+brankas:function(){if(has("kp"))return add("Brankas kosong. Hanya bau tanah.");ask("Brankas dengan 4 tombol angka. Kamu harus tahu angkanya.","1709",function(){give("kp");give("k2");add("Klik. Di dalam ada <b>Kunci Perpustakaan</b> dan <b>Sobekan Diary 2</b>.");draw()})},
+rak:function(){if(!lit())return add("Terlalu gelap. Senter matimu butuh baterai baru.");add("Buku-buku berdebu. Satu buku sejarah sekolah terbuka: <i>'Siswi Laras dinyatakan pindah pada 17 Maret 2009.'</i> Tapi tidak ada satu pun catatan kepindahan.")},
+jamantik:function(){if(!lit())return add("Sesuatu berdetak di kegelapan. Kamu butuh cahaya. Baterai di mana?");if(S.f.arsip)return act("arsip");ask("Jam antik dengan kotak kecil di bawahnya, berisi 4 angka putar (jam &amp; menit). Ada tulisan tipis: <i>'Setel saat semuanya berakhir.'</i>","0317,317",function(){S.f.arsip=1;add("Jarumnya berputar sendiri. Dinding di belakang jam bergeser... Pintu rahasia terbuka.");fear(8);draw();act("arsip")})},
+lio:function(){if(has("lio"))return;give("lio");add("Liontin itu berdenyut hangat. Kamu mendengar bisikan: <span class=\"w\">'Terima kasih...'</span>");draw()},
+map:function(){if(has("bk"))return;give("bk");add("Kamu mengambil map itu. Di dalamnya, bukti bahwa Laras tidak pindah, ia dikunci di sini.");draw()},
+gerbang:function(){if(has("lio")&&has("bk"))return ending("03:18","Kamu berdiri di depan gerbang dengan liontin dan map bukti. Gerbang berderit terbuka sendiri. Dari lantai dua, kamu melihat seorang gadis berkepang tersenyum di jendela, lalu memudar. Jam sekolah akhirnya berdetak: 03:18. Besok pagi, kamu menyerahkan bukti itu ke polisi. Laras akhirnya pulang.");add("Gerbang terkunci rantai. Bisikan di belakangmu: <span class=\"w\">'Jangan tinggalkan aku... temukan aku dulu.'</span>");fear(5)}
+};M[a]()}
+function ending(t,x){S.end=1;if(t!=="03:18")jump();else $("gh").style.opacity=0;$("hs").innerHTML="";$("inv").innerHTML="";$("clock").textContent=t==="03:18"?"03:18":"03:17";$("txt").innerHTML='<div class="end"><h2>'+t+'</h2><p>'+x+'</p><button onclick="init()">Main lagi</button></div>'}
+init();
+</script>
+</body>
+</html>
